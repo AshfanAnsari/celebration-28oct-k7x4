@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500&family=Amiri:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500&family=Amiri:wght@400&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   :root{
     --ivory:#F7F2E7;
@@ -21,6 +21,7 @@
     --gold:#B08A3C;
     --gold-soft:rgba(176,138,60,.55);
     --gold-faint:rgba(176,138,60,.28);
+    --gold-lite:#D9B968;
     --ivory-dim:rgba(247,242,231,.72);
     --ivory-faint:rgba(247,242,231,.45);
   }
@@ -32,7 +33,6 @@
     color:var(--ink);
     overflow:hidden;
   }
-  /* ---------- stage ---------- */
   .stage{
     position:relative;
     width:min(480px,100vw);
@@ -45,11 +45,7 @@
     user-select:none;
     -webkit-user-select:none;
   }
-  .track{
-    display:flex;height:100%;
-    transition:transform .85s cubic-bezier(.77,0,.18,1);
-    will-change:transform;
-  }
+  .track{display:flex;height:100%;transition:transform .85s cubic-bezier(.77,0,.18,1);will-change:transform}
   .track.dragging{transition:none}
   .slide{
     position:relative;flex:0 0 100%;height:100%;
@@ -59,74 +55,63 @@
   .slide.light{background:linear-gradient(180deg,var(--ivory-2),var(--ivory))}
   .slide.sand{background:linear-gradient(180deg,#F4EDDC,var(--sand))}
   .slide.dark{background:linear-gradient(180deg,#0E423B,var(--teal) 60%,#09302B);color:var(--ivory)}
-  /* arch hairline frame */
-  .arch{
-    position:absolute;inset:16px;border:1px solid var(--gold-faint);
-    border-radius:230px 230px 14px 14px;pointer-events:none;
-  }
+  .arch{position:absolute;inset:16px;border:1px solid var(--gold-faint);border-radius:230px 230px 14px 14px;pointer-events:none;z-index:3}
   .dark .arch{border-color:rgba(216,185,120,.35)}
-  .arch::after{
-    content:"";position:absolute;inset:5px;border:1px solid var(--gold-faint);
-    border-radius:225px 225px 10px 10px;opacity:.55;
-  }
-  /* gold dust — the one slow motion idea */
-  .dust{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-  .dust i{
-    position:absolute;bottom:-12px;border-radius:50%;
-    background:radial-gradient(circle,#D9B968 0%,rgba(217,185,104,0) 70%);
-    opacity:0;animation:rise linear infinite;
-  }
-  @keyframes rise{
-    0%{transform:translateY(0) translateX(0);opacity:0}
-    12%{opacity:var(--o,.5)}
-    85%{opacity:var(--o,.5)}
-    100%{transform:translateY(-104dvh) translateX(var(--sway,14px));opacity:0}
-  }
+  .arch::after{content:"";position:absolute;inset:5px;border:1px solid var(--gold-faint);border-radius:225px 225px 10px 10px;opacity:.55}
+  .dust{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+  .dust i{position:absolute;bottom:-12px;border-radius:50%;background:radial-gradient(circle,#D9B968 0%,rgba(217,185,104,0) 70%);opacity:0;animation:rise linear infinite}
+  @keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}12%{opacity:var(--o,.5)}85%{opacity:var(--o,.5)}100%{transform:translateY(-104dvh) translateX(var(--sway,14px));opacity:0}}
+  .above{position:relative;z-index:2}
   /* ---------- type ---------- */
   .bismillah{font-family:'Amiri',serif;font-size:27px;color:var(--gold);line-height:1.5}
-  .kicker{
-    font-size:11px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);
-  }
-  .kicker.on-dark{color:#D9B968}
+  .kicker{font-size:11px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:var(--gold)}
+  .kicker.on-dark{color:var(--gold-lite)}
   .lede{font-family:'Fraunces',serif;font-weight:300;font-size:16.5px;line-height:1.65;color:#4A4A3E;max-width:300px}
   .dark .lede{color:var(--ivory-dim)}
   .display{font-family:'Fraunces',serif;font-weight:500;color:var(--teal-ink);line-height:1.02}
   .dark .display{color:var(--ivory)}
+  .script{font-family:'Great Vibes',cursive;font-weight:400}
   .rule{display:flex;align-items:center;gap:12px;width:150px}
   .rule::before,.rule::after{content:"";height:1px;flex:1;background:var(--gold-soft)}
   .rule b{width:7px;height:7px;background:var(--gold);transform:rotate(45deg);flex:0 0 auto}
   .dark .rule::before,.dark .rule::after{background:rgba(217,185,104,.5)}
-  /* entrance choreography */
   .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1)}
-  .slide.active .rv{opacity:1;transform:none}
-  .slide.active .rv.d1{transition-delay:.15s}.slide.active .rv.d2{transition-delay:.28s}
-  .slide.active .rv.d3{transition-delay:.41s}.slide.active .rv.d4{transition-delay:.54s}
-  .slide.active .rv.d5{transition-delay:.67s}.slide.active .rv.d6{transition-delay:.8s}
+  .stage.opened .slide.active .rv{opacity:1;transform:none}
+  .stage.opened .slide.active .rv.d1{transition-delay:.15s}.stage.opened .slide.active .rv.d2{transition-delay:.28s}
+  .stage.opened .slide.active .rv.d3{transition-delay:.41s}.stage.opened .slide.active .rv.d4{transition-delay:.54s}
+  .stage.opened .slide.active .rv.d5{transition-delay:.67s}.stage.opened .slide.active .rv.d6{transition-delay:.8s}
+  .stage.opened .slide.active .rv.d7{transition-delay:.93s}
   /* ---------- cover ---------- */
   .cover-word{font-size:clamp(58px,17.5vw,76px);letter-spacing:.005em;margin-top:14px}
   .cover-sub{font-size:12.5px;letter-spacing:.58em;text-transform:uppercase;color:var(--ink);margin-top:12px;text-indent:.58em}
   .joy{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:19px;color:#55543F;margin-top:20px}
   /* ---------- baby ---------- */
-  .crescent{width:54px;height:54px;color:#D9B968}
+  #bloom{position:absolute;inset:0;z-index:0;pointer-events:none}
   .baby-name{font-size:clamp(56px,16.5vw,72px)}
-  .baby-name em{font-style:italic;font-weight:400;color:#D9B968}
+  .baby-name em{
+    font-style:italic;font-weight:400;
+    background:linear-gradient(100deg,#D9B968 25%,#F6E7BC 42%,#FFF7DC 50%,#F6E7BC 58%,#D9B968 75%);
+    background-size:250% 100%;background-position:100% 0;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  }
+  .stage.opened .slide.active .baby-name em{animation:sheen 2.6s ease .7s 1 both}
+  @keyframes sheen{from{background-position:100% 0}to{background-position:0% 0}}
   .sonof{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--ivory-faint);margin-top:30px}
   .parents{font-family:'Fraunces',serif;font-weight:400;font-size:19px;line-height:1.5;color:var(--ivory);margin-top:10px;white-space:nowrap}
-  .parents span{color:#D9B968;font-style:italic}
+  .parents span{color:var(--gold-lite);font-style:italic}
   /* ---------- when ---------- */
-  .bignum{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(150px,44vw,190px);line-height:.95;color:var(--teal-ink)}
+  .bignum{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(140px,41vw,178px);line-height:.95;color:var(--teal-ink)}
   .bignum sup{font-size:.22em;font-style:italic;color:var(--gold);font-weight:400;vertical-align:.9em}
-  .weekday{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:30px;color:var(--gold);margin-top:6px}
+  .weekday{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:30px;color:var(--gold);margin-top:4px}
   .monthline{font-size:13px;letter-spacing:.44em;text-transform:uppercase;margin-top:10px;color:var(--ink)}
-  .time-pill{
-    margin-top:30px;border:1px solid var(--gold-soft);border-radius:999px;padding:11px 26px;
-    font-size:14.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal-ink);background:rgba(255,255,255,.4);
-  }
-  .cal-btn{
-    margin-top:20px;display:inline-block;text-decoration:none;cursor:pointer;
-    font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
-    border-bottom:1px solid var(--gold-soft);padding-bottom:4px;
-  }
+  .time-pill{margin-top:26px;border:1px solid var(--gold-soft);border-radius:999px;padding:11px 26px;font-size:14.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal-ink);background:rgba(255,255,255,.4)}
+  .count{display:flex;gap:0;margin-top:28px;border-top:1px solid var(--gold-faint);border-bottom:1px solid var(--gold-faint)}
+  .count div{padding:10px 14px 8px;min-width:62px}
+  .count div+div{border-left:1px solid var(--gold-faint)}
+  .count b{display:block;font-weight:400;font-size:24px;color:var(--teal-ink);font-variant-numeric:tabular-nums;line-height:1}
+  .count span{display:block;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:5px}
+  .count-note{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#8A8570;margin-top:10px}
+  .cal-btn{margin-top:18px;display:inline-block;text-decoration:none;cursor:pointer;font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--gold-soft);padding-bottom:4px;background:none;border-top:none;border-left:none;border-right:none;font-family:'Jost',sans-serif}
   .cal-btn:active{opacity:.6}
   /* ---------- where ---------- */
   .home-word{font-size:clamp(52px,15vw,66px)}
@@ -134,44 +119,66 @@
   .note{font-family:'Fraunces',serif;font-weight:300;font-size:17.5px;line-height:1.7;color:#4A4A3E;max-width:308px;margin-top:22px}
   /* ---------- closing ---------- */
   .closing-line{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:27px;line-height:1.45;color:var(--ivory);max-width:320px}
-  .withlove{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--ivory-faint);margin-top:36px}
+  .withlove{margin-top:34px}
   .host{font-family:'Fraunces',serif;font-size:20px;color:var(--ivory);margin-top:12px;line-height:1.55}
-  .host small{display:block;font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:#D9B968;margin-top:2px}
-  .footline{position:absolute;bottom:96px;left:0;right:0;font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--ivory-faint)}
+  .host small{display:block;font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-lite);margin-top:2px}
+  .footline{position:absolute;bottom:96px;left:0;right:0;font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--ivory-faint);z-index:2}
   /* ---------- chrome ---------- */
-  .progress{position:absolute;top:0;left:0;height:2px;background:var(--gold);width:20%;transition:width .85s cubic-bezier(.77,0,.18,1);z-index:5}
-  .counter{
-    position:absolute;top:22px;right:26px;z-index:5;font-size:11px;letter-spacing:.3em;color:var(--gold);
-    font-weight:500;transition:color .5s;
-  }
-  .brandmark{position:absolute;top:20px;left:26px;z-index:5;font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:var(--gold);transition:color .5s}
-  .stage.on-dark .counter,.stage.on-dark .brandmark{color:#D9B968}
-  .navrow{
-    position:absolute;left:0;right:0;bottom:30px;z-index:5;
-    display:flex;align-items:center;justify-content:space-between;padding:0 30px;
-  }
-  .arrow{
-    width:42px;height:42px;border-radius:50%;border:1px solid var(--gold-soft);background:transparent;
-    color:var(--gold);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;
-    transition:background .3s,color .3s,opacity .3s;font-family:'Jost',sans-serif;
-  }
+  .progress{position:absolute;top:0;left:0;height:2px;background:var(--gold);width:20%;transition:width .85s cubic-bezier(.77,0,.18,1),opacity .6s;z-index:5}
+  .counter{position:absolute;top:22px;right:26px;z-index:5;font-size:11px;letter-spacing:.3em;color:var(--gold);font-weight:500;transition:color .5s,opacity .6s}
+  .brandmark{position:absolute;top:20px;left:26px;z-index:5;font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:var(--gold);transition:color .5s,opacity .6s}
+  .stage.on-dark .counter,.stage.on-dark .brandmark{color:var(--gold-lite)}
+  .navrow{position:absolute;left:0;right:0;bottom:30px;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:0 30px;transition:opacity .6s}
+  .arrow{width:42px;height:42px;border-radius:50%;border:1px solid var(--gold-soft);background:transparent;color:var(--gold);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s,color .3s,opacity .3s;font-family:'Jost',sans-serif}
   .arrow:disabled{opacity:.25;cursor:default}
-  .stage.on-dark .arrow{border-color:rgba(217,185,104,.5);color:#D9B968}
+  .stage.on-dark .arrow{border-color:rgba(217,185,104,.5);color:var(--gold-lite)}
   .dots{display:flex;gap:9px;align-items:center}
   .dot{width:7px;height:7px;border-radius:50%;border:1px solid var(--gold);background:transparent;cursor:pointer;padding:0;transition:background .3s,transform .3s}
   .dot.on{background:var(--gold);transform:scale(1.25)}
-  .hint{
-    position:absolute;left:0;right:0;bottom:86px;z-index:4;text-align:center;
-    font-size:10.5px;letter-spacing:.36em;text-transform:uppercase;color:#8A8570;
-    animation:hintfloat 2.6s ease-in-out infinite;pointer-events:none;transition:opacity .5s;
-  }
+  .hint{position:absolute;left:0;right:0;bottom:86px;z-index:4;text-align:center;font-size:10.5px;letter-spacing:.36em;text-transform:uppercase;color:#8A8570;animation:hintfloat 2.6s ease-in-out infinite;pointer-events:none;transition:opacity .5s}
   @keyframes hintfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
   .hint.gone{opacity:0}
+  .stage:not(.opened) .progress,.stage:not(.opened) .counter,.stage:not(.opened) .brandmark,.stage:not(.opened) .navrow,.stage:not(.opened) .hint{opacity:0;pointer-events:none}
+  /* ---------- gate ---------- */
+  #gate{
+    position:absolute;inset:0;z-index:20;background:linear-gradient(180deg,var(--ivory-2),var(--ivory));
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 34px;
+    transition:opacity .55s ease;
+  }
+  #gate.lift{opacity:0;pointer-events:none}
+  .gate-arch{position:absolute;inset:16px;border:1px solid var(--gold-faint);border-radius:230px 230px 14px 14px;pointer-events:none}
+  .gate-arch::after{content:"";position:absolute;inset:5px;border:1px solid var(--gold-faint);border-radius:225px 225px 10px 10px;opacity:.55}
+  .seal{position:relative;width:118px;height:118px;display:flex;align-items:center;justify-content:center}
+  .seal .ring{position:absolute;inset:0;border-radius:50%;border:1px solid var(--gold-soft)}
+  .seal .ring.r2{inset:7px;border-color:var(--gold-faint)}
+  .seal .pulse{position:absolute;inset:0;border-radius:50%;border:1px solid var(--gold-soft);animation:pulse 3s ease-out infinite}
+  .seal .pulse.p2{animation-delay:1.5s}
+  @keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.22);opacity:0}}
+  .seal svg{width:52px;height:52px;color:var(--gold)}
+  .gate-script{font-family:'Great Vibes',cursive;font-size:44px;color:var(--teal-ink);margin-top:30px;line-height:1.15}
+  .gate-sub{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:#8A8570;margin-top:14px}
+  .open-btn{
+    margin-top:36px;border:1px solid var(--gold);color:var(--teal-ink);background:transparent;cursor:pointer;
+    border-radius:999px;padding:14px 34px;font-family:'Jost',sans-serif;font-size:12.5px;letter-spacing:.3em;text-transform:uppercase;
+    transition:background .3s,color .3s;
+  }
+  .open-btn:active{background:var(--gold);color:#fff}
+  .gate-date{position:absolute;bottom:44px;left:0;right:0;font-size:10.5px;letter-spacing:.4em;color:#A39C83;text-transform:uppercase}
+  /* ---------- wipe ---------- */
+  #wipe{
+    position:absolute;inset:0;z-index:15;pointer-events:none;
+    background:radial-gradient(circle at 50% 42%, #12554B 0%, var(--teal) 55%, var(--teal-deep) 100%);
+    clip-path:circle(0% at 50% 42%);opacity:0;
+  }
+  #wipe.run{opacity:1;transition:clip-path 1.15s cubic-bezier(.77,0,.18,1);clip-path:circle(142% at 50% 42%)}
+  #wipe.fade{transition:opacity .6s ease;opacity:0}
   @media (prefers-reduced-motion: reduce){
-    .dust i{animation:none}
+    .dust i,.seal .pulse{animation:none}
     .track{transition-duration:.2s}
     .rv{transition-duration:.2s}
     .hint{animation:none}
+    #wipe.run{transition-duration:.2s}
+    .stage.opened .slide.active .baby-name em{animation:none}
   }
 </style>
 </head>
@@ -184,63 +191,67 @@
   <div class="track" id="track">
 
     <!-- 1 · COVER -->
-    <section class="slide light active">
+    <section class="slide light">
       <div class="arch"></div><div class="dust"></div>
-      <div class="bismillah rv d1">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-      <p class="lede rv d2" style="margin-top:16px">With the blessings of Almighty Allah<br>and the love of our family,<br>we are delighted to invite you to the</p>
-      <h1 class="display cover-word rv d3">Chhatiyar</h1>
-      <div class="cover-sub rv d4">Ceremony</div>
-      <div class="rule rv d5" style="margin-top:26px"><b></b></div>
-      <p class="joy rv d6">of our little bundle of joy</p>
+      <div class="bismillah above rv d1">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <p class="lede above rv d2" style="margin-top:16px">With the blessings of Almighty Allah<br>and the love of our family,<br>we are delighted to invite you to the</p>
+      <h1 class="display cover-word above rv d3">Chhatiyar</h1>
+      <div class="cover-sub above rv d4">Ceremony</div>
+      <div class="rule above rv d5" style="margin-top:26px"><b></b></div>
+      <p class="joy above rv d6">of our little bundle of joy</p>
     </section>
 
     <!-- 2 · THE BABY -->
     <section class="slide dark">
+      <canvas id="bloom"></canvas>
       <div class="arch"></div><div class="dust"></div>
-      <svg class="crescent rv d1" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
-        <path d="M32.5 5.5A19 19 0 1 0 42.5 30 15.5 15.5 0 0 1 32.5 5.5Z"/>
-        <path d="M36 4l1.2 3.1L40.3 8.3l-3.1 1.2L36 12.6l-1.2-3.1-3.1-1.2 3.1-1.2L36 4Z" fill="currentColor" stroke="none"/>
-      </svg>
-      <div class="kicker on-dark rv d2" style="margin-top:22px">Our Little Bundle of Joy</div>
-      <h2 class="display baby-name rv d3" style="margin-top:16px">Mohammad<br><em>Asad</em></h2>
-      <div class="rule rv d4" style="margin-top:28px"><b></b></div>
-      <div class="sonof rv d5">Son of</div>
-      <p class="parents rv d6">Dilsad Ahmed <span>&amp;</span> Washima Khatoon</p>
+      <div class="kicker on-dark above rv d1">Our Little Bundle of Joy</div>
+      <h2 class="display baby-name above rv d2" style="margin-top:18px">Mohammad<br><em>Asad</em></h2>
+      <div class="rule above rv d3" style="margin-top:28px"><b></b></div>
+      <div class="sonof above rv d4">Son of</div>
+      <p class="parents above rv d5">Dilsad Ahmed <span>&amp;</span> Washima Khatoon</p>
     </section>
 
     <!-- 3 · WHEN -->
     <section class="slide light">
       <div class="arch"></div><div class="dust"></div>
-      <div class="kicker rv d1">The Celebration</div>
-      <div class="bignum rv d2">28<sup>th</sup></div>
-      <div class="weekday rv d3">Wednesday</div>
-      <div class="monthline rv d3">October · 2026</div>
-      <div class="time-pill rv d4">6:00 PM Onwards</div>
-      <a class="cal-btn rv d5" target="_blank" rel="noopener"
+      <div class="kicker above rv d1">The Celebration</div>
+      <div class="bignum above rv d2">28<sup>th</sup></div>
+      <div class="weekday above rv d3">Wednesday</div>
+      <div class="monthline above rv d3">October · 2026</div>
+      <div class="time-pill above rv d4">6:00 PM Onwards</div>
+      <div class="count above rv d5" role="timer" aria-label="Countdown to the celebration">
+        <div><b id="cd-d">--</b><span>Days</span></div>
+        <div><b id="cd-h">--</b><span>Hours</span></div>
+        <div><b id="cd-m">--</b><span>Mins</span></div>
+        <div><b id="cd-s">--</b><span>Secs</span></div>
+      </div>
+      <div class="count-note above rv d6" id="cd-note">Until the celebration</div>
+      <a class="cal-btn above rv d7" target="_blank" rel="noopener"
          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Chhatiyar%20Ceremony%20of%20Mohammad%20Asad&dates=20261028T123000Z/20261028T153000Z&details=Chhatiyar%20Ceremony%20of%20Mohammad%20Asad%2C%20son%20of%20Dilsad%20Ahmed%20%26%20Washima%20Khatoon.&location=Our%20Home">Add to Calendar</a>
     </section>
 
     <!-- 4 · WHERE -->
     <section class="slide sand">
       <div class="arch"></div><div class="dust"></div>
-      <svg class="home-ico rv d1" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
+      <svg class="home-ico above rv d1" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
         <path d="M8 24 24 9l16 15"/><path d="M13 22v16h22V22"/><path d="M20 38V29h8v9"/>
       </svg>
-      <div class="kicker rv d2" style="margin-top:18px">The Venue</div>
-      <h2 class="display home-word rv d3" style="margin-top:12px">Our Home</h2>
-      <div class="rule rv d4" style="margin-top:24px"><b></b></div>
-      <p class="note rv d5">Your presence will make this special occasion even more memorable. We would be honoured to have you with us to bless our baby.</p>
+      <div class="kicker above rv d2" style="margin-top:18px">The Venue</div>
+      <h2 class="display home-word above rv d3" style="margin-top:12px">Our Home</h2>
+      <div class="rule above rv d4" style="margin-top:24px"><b></b></div>
+      <p class="note above rv d5">Your presence will make this special occasion even more memorable. We would be honoured to have you with us to bless our baby.</p>
     </section>
 
     <!-- 5 · CLOSING -->
     <section class="slide dark">
       <div class="arch"></div><div class="dust"></div>
-      <p class="closing-line rv d1">“We look forward to your kind presence and blessings.”</p>
-      <div class="rule rv d2" style="margin-top:30px"><b></b></div>
-      <div class="withlove rv d3">With Love</div>
-      <div class="host rv d4">Dilsad Ahmed<small>Father</small></div>
-      <div class="host rv d5">Washima Khatoon<small>Mother</small></div>
-      <button class="cal-btn rv d6" id="againBtn" style="background:none;border-top:none;border-left:none;border-right:none;font-family:'Jost',sans-serif;margin-top:30px">View Again</button>
+      <p class="closing-line above rv d1">“We look forward to your kind presence and blessings.”</p>
+      <div class="rule above rv d2" style="margin-top:30px"><b></b></div>
+      <div class="script above rv d3 withlove" style="font-size:34px;color:var(--gold-lite)">with love,</div>
+      <div class="host above rv d4">Dilsad Ahmed<small>Father</small></div>
+      <div class="host above rv d5">Washima Khatoon<small>Mother</small></div>
+      <button class="cal-btn above rv d6" id="againBtn" style="color:var(--gold-lite);border-color:rgba(217,185,104,.5);margin-top:30px">View Again</button>
       <div class="footline">Mohammad Asad · 28 · 10 · 2026</div>
     </section>
 
@@ -251,6 +262,26 @@
     <button class="arrow" id="prevBtn" aria-label="Previous slide">←</button>
     <div class="dots" id="dots"></div>
     <button class="arrow" id="nextBtn" aria-label="Next slide">→</button>
+  </div>
+
+  <div id="wipe"></div>
+
+  <!-- GATE -->
+  <div id="gate">
+    <div class="gate-arch"></div>
+    <div class="dust"></div>
+    <div class="seal above">
+      <span class="ring"></span><span class="ring r2"></span>
+      <span class="pulse"></span><span class="pulse p2"></span>
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
+        <path d="M32.5 5.5A19 19 0 1 0 42.5 30 15.5 15.5 0 0 1 32.5 5.5Z"/>
+        <path d="M36 4l1.2 3.1L40.3 8.3l-3.1 1.2L36 12.6l-1.2-3.1-3.1-1.2 3.1-1.2L36 4Z" fill="currentColor" stroke="none"/>
+      </svg>
+    </div>
+    <div class="gate-script above">An invitation awaits</div>
+    <div class="gate-sub above">For You &amp; Your Family</div>
+    <button class="open-btn above" id="openBtn">Open the Invitation</button>
+    <div class="gate-date">28 · 10 · 2026</div>
   </div>
 </div>
 
@@ -265,7 +296,7 @@
   const dotsWrap = document.getElementById('dots');
   const hint = document.getElementById('hint');
   const DARK = [false, true, false, false, true];
-  let idx = 0, interacted = false;
+  let idx = 0, interacted = false, opened = false;
 
   slides.forEach((_, i) => {
     const d = document.createElement('button');
@@ -289,20 +320,21 @@
     prevBtn.disabled = idx === 0;
     nextBtn.disabled = idx === slides.length - 1;
     if (!interacted && idx > 0) { interacted = true; hint.classList.add('gone'); }
+    if (idx === 1) { if (!bloomStarted) startBloom(); else if (!bloomRunning) { bloomRunning = true; requestAnimationFrame(bloomFrame); } }
     render();
   }
   prevBtn.addEventListener('click', () => goTo(idx - 1));
   nextBtn.addEventListener('click', () => goTo(idx + 1));
   document.getElementById('againBtn').addEventListener('click', () => goTo(0));
   window.addEventListener('keydown', e => {
+    if (!opened) return;
     if (e.key === 'ArrowRight') goTo(idx + 1);
     if (e.key === 'ArrowLeft') goTo(idx - 1);
   });
 
-  /* drag / swipe */
   let startX = null, dx = 0;
   stage.addEventListener('pointerdown', e => {
-    if (e.target.closest('a,button')) return;
+    if (!opened || e.target.closest('a,button')) return;
     startX = e.clientX; dx = 0;
     track.classList.add('dragging');
   });
@@ -321,15 +353,14 @@
   stage.addEventListener('pointerup', endDrag);
   stage.addEventListener('pointercancel', endDrag);
 
-  /* wheel */
   let wheelLock = false;
   stage.addEventListener('wheel', e => {
-    if (wheelLock || Math.abs(e.deltaY) < 24) return;
+    if (!opened || wheelLock || Math.abs(e.deltaY) < 24) return;
     wheelLock = true; setTimeout(() => wheelLock = false, 900);
     goTo(idx + (e.deltaY > 0 ? 1 : -1));
   }, { passive: true });
 
-  /* gold dust — one slow motion idea */
+  /* gold dust */
   document.querySelectorAll('.dust').forEach(layer => {
     for (let i = 0; i < 16; i++) {
       const s = document.createElement('i');
@@ -344,7 +375,107 @@
     }
   });
 
+  /* ---------- gate + circle wipe (the birthday-site reveal, translated) ---------- */
+  const gate = document.getElementById('gate');
+  const wipe = document.getElementById('wipe');
+  document.getElementById('openBtn').addEventListener('click', () => {
+    if (opened) return;
+    opened = true;
+    wipe.classList.add('run');
+    setTimeout(() => gate.classList.add('lift'), 420);
+    setTimeout(() => {
+      stage.classList.add('opened');
+      slides[0].classList.add('active');
+    }, 500);
+    setTimeout(() => wipe.classList.add('fade'), 1250);
+    setTimeout(() => { wipe.style.display = 'none'; gate.style.display = 'none'; }, 1950);
+  });
+
+  /* ---------- blooming crescent ---------- */
+  const canvas = document.getElementById('bloom');
+  const ctx = canvas.getContext('2d');
+  let bloomStarted = false, bloomRunning = false, parts = [], bloomT0 = 0;
+  function sizeBloom() {
+    const slide = slides[1];
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = slide.clientWidth * dpr;
+    canvas.height = slide.clientHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function crescentPoints(w, h) {
+    const cx = w * 0.5, cy = h * 0.435, R = Math.min(w, h) * 0.335;
+    const ox = cx + R * 0.38, oy = cy - R * 0.14, r2 = R * 0.86;
+    const pts = [];
+    let guard = 0;
+    while (pts.length < 140 && guard++ < 9000) {
+      const a = Math.random() * Math.PI * 2, rr = R * (0.78 + 0.22 * Math.random());
+      const x = cx + Math.cos(a) * rr + (Math.random() * 4 - 2), y = cy + Math.sin(a) * rr + (Math.random() * 4 - 2);
+      if (Math.hypot(x - ox, y - oy) > r2) pts.push({ x, y });
+    }
+    return pts;
+  }
+  function startBloom() {
+    if (bloomStarted) return;
+    bloomStarted = true;
+    sizeBloom();
+    const slide = slides[1], w = slide.clientWidth, h = slide.clientHeight;
+    const targets = crescentPoints(w, h);
+    parts = targets.map((t, i) => ({
+      tx: t.x, ty: t.y,
+      sx: Math.random() * w, sy: h + Math.random() * h * 0.4,
+      size: 0.8 + Math.random() * 1.9,
+      delay: i * 7 + Math.random() * 250,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.6 + Math.random() * 1.1
+    }));
+    bloomT0 = performance.now();
+    bloomRunning = true;
+    requestAnimationFrame(bloomFrame);
+  }
+  function bloomFrame(now) {
+    const slide = slides[1], w = slide.clientWidth, h = slide.clientHeight;
+    ctx.clearRect(0, 0, w, h);
+    const t = now - bloomT0;
+    let settled = true;
+    for (const p of parts) {
+      const lt = Math.max(0, Math.min(1, (t - p.delay) / 1500));
+      if (lt < 1) settled = false;
+      const e = 1 - Math.pow(1 - lt, 3);
+      const x = p.sx + (p.tx - p.sx) * e;
+      const y = p.sy + (p.ty - p.sy) * e;
+      const tw = settled ? 0.45 + 0.55 * (0.5 + 0.5 * Math.sin(now * 0.001 * p.speed + p.phase)) : 0.25 + 0.75 * lt;
+      ctx.beginPath();
+      ctx.arc(x, y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(226,192,110,${tw.toFixed(3)})`;
+      ctx.fill();
+    }
+    if (slides[1].classList.contains('active') || !settled) requestAnimationFrame(bloomFrame);
+    else { bloomRunning = false; ctx.clearRect(0, 0, w, h); }
+  }
+  window.addEventListener('resize', () => { if (bloomStarted) { sizeBloom(); } });
+
+  /* ---------- countdown ---------- */
+  const target = new Date('2026-10-28T18:00:00+05:30').getTime();
+  const cd = { d: document.getElementById('cd-d'), h: document.getElementById('cd-h'), m: document.getElementById('cd-m'), s: document.getElementById('cd-s'), note: document.getElementById('cd-note') };
+  function tick() {
+    let diff = target - Date.now();
+    if (diff <= 0) {
+      cd.d.textContent = cd.h.textContent = cd.m.textContent = cd.s.textContent = '00';
+      cd.note.textContent = 'The celebration has begun';
+      return;
+    }
+    const d = Math.floor(diff / 864e5), h = Math.floor(diff / 36e5) % 24, m = Math.floor(diff / 6e4) % 60, s = Math.floor(diff / 1e3) % 60;
+    cd.d.textContent = String(d).padStart(2, '0');
+    cd.h.textContent = String(h).padStart(2, '0');
+    cd.m.textContent = String(m).padStart(2, '0');
+    cd.s.textContent = String(s).padStart(2, '0');
+    setTimeout(tick, 1000);
+  }
+  tick();
+
+  slides[0].classList.remove('active');
   goTo(0);
+  slides[0].classList.remove('active');
 </script>
 </body>
 </html>

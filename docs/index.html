@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Chhatiyar Ceremony — Mohammad Asad</title>
+<meta name="description" content="With the blessings of Almighty Allah and the love of our family, we invite you to the Chhatiyar Ceremony of Mohammad Asad — Wednesday, 28 October 2026, 6:00 PM onwards, at our home.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500&family=Amiri:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F7F2E7;
+    --ivory-2:#FBF8F1;
+    --sand:#F0E7D3;
+    --teal:#0C3B35;
+    --teal-deep:#082A26;
+    --teal-ink:#0C3B35;
+    --ink:#2A3128;
+    --gold:#B08A3C;
+    --gold-soft:rgba(176,138,60,.55);
+    --gold-faint:rgba(176,138,60,.28);
+    --ivory-dim:rgba(247,242,231,.72);
+    --ivory-faint:rgba(247,242,231,.45);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:'Jost',sans-serif;
+    background:radial-gradient(120% 90% at 50% 0%, #11453E 0%, var(--teal-deep) 55%, #051B18 100%);
+    color:var(--ink);
+    overflow:hidden;
+  }
+  /* ---------- stage ---------- */
+  .stage{
+    position:relative;
+    width:min(480px,100vw);
+    height:100dvh;
+    margin:0 auto;
+    overflow:hidden;
+    background:var(--ivory);
+    box-shadow:0 0 90px rgba(0,0,0,.5);
+    touch-action:pan-y;
+    user-select:none;
+    -webkit-user-select:none;
+  }
+  .track{
+    display:flex;height:100%;
+    transition:transform .85s cubic-bezier(.77,0,.18,1);
+    will-change:transform;
+  }
+  .track.dragging{transition:none}
+  .slide{
+    position:relative;flex:0 0 100%;height:100%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:56px 34px 92px;text-align:center;overflow:hidden;
+  }
+  .slide.light{background:linear-gradient(180deg,var(--ivory-2),var(--ivory))}
+  .slide.sand{background:linear-gradient(180deg,#F4EDDC,var(--sand))}
+  .slide.dark{background:linear-gradient(180deg,#0E423B,var(--teal) 60%,#09302B);color:var(--ivory)}
+  /* arch hairline frame */
+  .arch{
+    position:absolute;inset:16px;border:1px solid var(--gold-faint);
+    border-radius:230px 230px 14px 14px;pointer-events:none;
+  }
+  .dark .arch{border-color:rgba(216,185,120,.35)}
+  .arch::after{
+    content:"";position:absolute;inset:5px;border:1px solid var(--gold-faint);
+    border-radius:225px 225px 10px 10px;opacity:.55;
+  }
+  /* gold dust — the one slow motion idea */
+  .dust{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .dust i{
+    position:absolute;bottom:-12px;border-radius:50%;
+    background:radial-gradient(circle,#D9B968 0%,rgba(217,185,104,0) 70%);
+    opacity:0;animation:rise linear infinite;
+  }
+  @keyframes rise{
+    0%{transform:translateY(0) translateX(0);opacity:0}
+    12%{opacity:var(--o,.5)}
+    85%{opacity:var(--o,.5)}
+    100%{transform:translateY(-104dvh) translateX(var(--sway,14px));opacity:0}
+  }
+  /* ---------- type ---------- */
+  .bismillah{font-family:'Amiri',serif;font-size:27px;color:var(--gold);line-height:1.5}
+  .kicker{
+    font-size:11px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);
+  }
+  .kicker.on-dark{color:#D9B968}
+  .lede{font-family:'Fraunces',serif;font-weight:300;font-size:16.5px;line-height:1.65;color:#4A4A3E;max-width:300px}
+  .dark .lede{color:var(--ivory-dim)}
+  .display{font-family:'Fraunces',serif;font-weight:500;color:var(--teal-ink);line-height:1.02}
+  .dark .display{color:var(--ivory)}
+  .rule{display:flex;align-items:center;gap:12px;width:150px}
+  .rule::before,.rule::after{content:"";height:1px;flex:1;background:var(--gold-soft)}
+  .rule b{width:7px;height:7px;background:var(--gold);transform:rotate(45deg);flex:0 0 auto}
+  .dark .rule::before,.dark .rule::after{background:rgba(217,185,104,.5)}
+  /* entrance choreography */
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1)}
+  .slide.active .rv{opacity:1;transform:none}
+  .slide.active .rv.d1{transition-delay:.15s}.slide.active .rv.d2{transition-delay:.28s}
+  .slide.active .rv.d3{transition-delay:.41s}.slide.active .rv.d4{transition-delay:.54s}
+  .slide.active .rv.d5{transition-delay:.67s}.slide.active .rv.d6{transition-delay:.8s}
+  /* ---------- cover ---------- */
+  .cover-word{font-size:clamp(58px,17.5vw,76px);letter-spacing:.005em;margin-top:14px}
+  .cover-sub{font-size:12.5px;letter-spacing:.58em;text-transform:uppercase;color:var(--ink);margin-top:12px;text-indent:.58em}
+  .joy{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:19px;color:#55543F;margin-top:20px}
+  /* ---------- baby ---------- */
+  .crescent{width:54px;height:54px;color:#D9B968}
+  .baby-name{font-size:clamp(56px,16.5vw,72px)}
+  .baby-name em{font-style:italic;font-weight:400;color:#D9B968}
+  .sonof{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--ivory-faint);margin-top:30px}
+  .parents{font-family:'Fraunces',serif;font-weight:400;font-size:19px;line-height:1.5;color:var(--ivory);margin-top:10px;white-space:nowrap}
+  .parents span{color:#D9B968;font-style:italic}
+  /* ---------- when ---------- */
+  .bignum{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(150px,44vw,190px);line-height:.95;color:var(--teal-ink)}
+  .bignum sup{font-size:.22em;font-style:italic;color:var(--gold);font-weight:400;vertical-align:.9em}
+  .weekday{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:30px;color:var(--gold);margin-top:6px}
+  .monthline{font-size:13px;letter-spacing:.44em;text-transform:uppercase;margin-top:10px;color:var(--ink)}
+  .time-pill{
+    margin-top:30px;border:1px solid var(--gold-soft);border-radius:999px;padding:11px 26px;
+    font-size:14.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal-ink);background:rgba(255,255,255,.4);
+  }
+  .cal-btn{
+    margin-top:20px;display:inline-block;text-decoration:none;cursor:pointer;
+    font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
+    border-bottom:1px solid var(--gold-soft);padding-bottom:4px;
+  }
+  .cal-btn:active{opacity:.6}
+  /* ---------- where ---------- */
+  .home-word{font-size:clamp(52px,15vw,66px)}
+  .home-ico{width:46px;height:46px;color:var(--gold)}
+  .note{font-family:'Fraunces',serif;font-weight:300;font-size:17.5px;line-height:1.7;color:#4A4A3E;max-width:308px;margin-top:22px}
+  /* ---------- closing ---------- */
+  .closing-line{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:27px;line-height:1.45;color:var(--ivory);max-width:320px}
+  .withlove{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--ivory-faint);margin-top:36px}
+  .host{font-family:'Fraunces',serif;font-size:20px;color:var(--ivory);margin-top:12px;line-height:1.55}
+  .host small{display:block;font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:#D9B968;margin-top:2px}
+  .footline{position:absolute;bottom:96px;left:0;right:0;font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--ivory-faint)}
+  /* ---------- chrome ---------- */
+  .progress{position:absolute;top:0;left:0;height:2px;background:var(--gold);width:20%;transition:width .85s cubic-bezier(.77,0,.18,1);z-index:5}
+  .counter{
+    position:absolute;top:22px;right:26px;z-index:5;font-size:11px;letter-spacing:.3em;color:var(--gold);
+    font-weight:500;transition:color .5s;
+  }
+  .brandmark{position:absolute;top:20px;left:26px;z-index:5;font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:var(--gold);transition:color .5s}
+  .stage.on-dark .counter,.stage.on-dark .brandmark{color:#D9B968}
+  .navrow{
+    position:absolute;left:0;right:0;bottom:30px;z-index:5;
+    display:flex;align-items:center;justify-content:space-between;padding:0 30px;
+  }
+  .arrow{
+    width:42px;height:42px;border-radius:50%;border:1px solid var(--gold-soft);background:transparent;
+    color:var(--gold);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:background .3s,color .3s,opacity .3s;font-family:'Jost',sans-serif;
+  }
+  .arrow:disabled{opacity:.25;cursor:default}
+  .stage.on-dark .arrow{border-color:rgba(217,185,104,.5);color:#D9B968}
+  .dots{display:flex;gap:9px;align-items:center}
+  .dot{width:7px;height:7px;border-radius:50%;border:1px solid var(--gold);background:transparent;cursor:pointer;padding:0;transition:background .3s,transform .3s}
+  .dot.on{background:var(--gold);transform:scale(1.25)}
+  .hint{
+    position:absolute;left:0;right:0;bottom:86px;z-index:4;text-align:center;
+    font-size:10.5px;letter-spacing:.36em;text-transform:uppercase;color:#8A8570;
+    animation:hintfloat 2.6s ease-in-out infinite;pointer-events:none;transition:opacity .5s;
+  }
+  @keyframes hintfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  .hint.gone{opacity:0}
+  @media (prefers-reduced-motion: reduce){
+    .dust i{animation:none}
+    .track{transition-duration:.2s}
+    .rv{transition-duration:.2s}
+    .hint{animation:none}
+  }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="progress" id="progress"></div>
+  <div class="brandmark">M · A</div>
+  <div class="counter" id="counter">01 / 05</div>
+
+  <div class="track" id="track">
+
+    <!-- 1 · COVER -->
+    <section class="slide light active">
+      <div class="arch"></div><div class="dust"></div>
+      <div class="bismillah rv d1">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <p class="lede rv d2" style="margin-top:16px">With the blessings of Almighty Allah<br>and the love of our family,<br>we are delighted to invite you to the</p>
+      <h1 class="display cover-word rv d3">Chhatiyar</h1>
+      <div class="cover-sub rv d4">Ceremony</div>
+      <div class="rule rv d5" style="margin-top:26px"><b></b></div>
+      <p class="joy rv d6">of our little bundle of joy</p>
+    </section>
+
+    <!-- 2 · THE BABY -->
+    <section class="slide dark">
+      <div class="arch"></div><div class="dust"></div>
+      <svg class="crescent rv d1" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
+        <path d="M32.5 5.5A19 19 0 1 0 42.5 30 15.5 15.5 0 0 1 32.5 5.5Z"/>
+        <path d="M36 4l1.2 3.1L40.3 8.3l-3.1 1.2L36 12.6l-1.2-3.1-3.1-1.2 3.1-1.2L36 4Z" fill="currentColor" stroke="none"/>
+      </svg>
+      <div class="kicker on-dark rv d2" style="margin-top:22px">Our Little Bundle of Joy</div>
+      <h2 class="display baby-name rv d3" style="margin-top:16px">Mohammad<br><em>Asad</em></h2>
+      <div class="rule rv d4" style="margin-top:28px"><b></b></div>
+      <div class="sonof rv d5">Son of</div>
+      <p class="parents rv d6">Dilsad Ahmed <span>&amp;</span> Washima Khatoon</p>
+    </section>
+
+    <!-- 3 · WHEN -->
+    <section class="slide light">
+      <div class="arch"></div><div class="dust"></div>
+      <div class="kicker rv d1">The Celebration</div>
+      <div class="bignum rv d2">28<sup>th</sup></div>
+      <div class="weekday rv d3">Wednesday</div>
+      <div class="monthline rv d3">October · 2026</div>
+      <div class="time-pill rv d4">6:00 PM Onwards</div>
+      <a class="cal-btn rv d5" target="_blank" rel="noopener"
+         href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Chhatiyar%20Ceremony%20of%20Mohammad%20Asad&dates=20261028T123000Z/20261028T153000Z&details=Chhatiyar%20Ceremony%20of%20Mohammad%20Asad%2C%20son%20of%20Dilsad%20Ahmed%20%26%20Washima%20Khatoon.&location=Our%20Home">Add to Calendar</a>
+    </section>
+
+    <!-- 4 · WHERE -->
+    <section class="slide sand">
+      <div class="arch"></div><div class="dust"></div>
+      <svg class="home-ico rv d1" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
+        <path d="M8 24 24 9l16 15"/><path d="M13 22v16h22V22"/><path d="M20 38V29h8v9"/>
+      </svg>
+      <div class="kicker rv d2" style="margin-top:18px">The Venue</div>
+      <h2 class="display home-word rv d3" style="margin-top:12px">Our Home</h2>
+      <div class="rule rv d4" style="margin-top:24px"><b></b></div>
+      <p class="note rv d5">Your presence will make this special occasion even more memorable. We would be honoured to have you with us to bless our baby.</p>
+    </section>
+
+    <!-- 5 · CLOSING -->
+    <section class="slide dark">
+      <div class="arch"></div><div class="dust"></div>
+      <p class="closing-line rv d1">“We look forward to your kind presence and blessings.”</p>
+      <div class="rule rv d2" style="margin-top:30px"><b></b></div>
+      <div class="withlove rv d3">With Love</div>
+      <div class="host rv d4">Dilsad Ahmed<small>Father</small></div>
+      <div class="host rv d5">Washima Khatoon<small>Mother</small></div>
+      <button class="cal-btn rv d6" id="againBtn" style="background:none;border-top:none;border-left:none;border-right:none;font-family:'Jost',sans-serif;margin-top:30px">View Again</button>
+      <div class="footline">Mohammad Asad · 28 · 10 · 2026</div>
+    </section>
+
+  </div>
+
+  <div class="hint" id="hint">Slide to Open</div>
+  <div class="navrow">
+    <button class="arrow" id="prevBtn" aria-label="Previous slide">←</button>
+    <div class="dots" id="dots"></div>
+    <button class="arrow" id="nextBtn" aria-label="Next slide">→</button>
+  </div>
+</div>
+
+<script>
+  const stage = document.getElementById('stage');
+  const track = document.getElementById('track');
+  const slides = [...track.children];
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const dotsWrap = document.getElementById('dots');
+  const hint = document.getElementById('hint');
+  const DARK = [false, true, false, false, true];
+  let idx = 0, interacted = false;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' on' : '');
+    d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    d.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(d);
+  });
+  const dots = [...dotsWrap.children];
+
+  function render(offsetPx = 0) {
+    track.style.transform = `translateX(calc(${-idx * 100}% + ${offsetPx}px))`;
+  }
+  function goTo(i) {
+    idx = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach((s, k) => s.classList.toggle('active', k === idx));
+    dots.forEach((d, k) => d.classList.toggle('on', k === idx));
+    counter.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+    progress.style.width = ((idx + 1) / slides.length * 100) + '%';
+    stage.classList.toggle('on-dark', DARK[idx]);
+    prevBtn.disabled = idx === 0;
+    nextBtn.disabled = idx === slides.length - 1;
+    if (!interacted && idx > 0) { interacted = true; hint.classList.add('gone'); }
+    render();
+  }
+  prevBtn.addEventListener('click', () => goTo(idx - 1));
+  nextBtn.addEventListener('click', () => goTo(idx + 1));
+  document.getElementById('againBtn').addEventListener('click', () => goTo(0));
+  window.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') goTo(idx + 1);
+    if (e.key === 'ArrowLeft') goTo(idx - 1);
+  });
+
+  /* drag / swipe */
+  let startX = null, dx = 0;
+  stage.addEventListener('pointerdown', e => {
+    if (e.target.closest('a,button')) return;
+    startX = e.clientX; dx = 0;
+    track.classList.add('dragging');
+  });
+  stage.addEventListener('pointermove', e => {
+    if (startX === null) return;
+    dx = e.clientX - startX;
+    const edge = (idx === 0 && dx > 0) || (idx === slides.length - 1 && dx < 0);
+    render(edge ? dx * 0.35 : dx);
+  });
+  function endDrag() {
+    if (startX === null) return;
+    track.classList.remove('dragging');
+    if (dx < -60) goTo(idx + 1); else if (dx > 60) goTo(idx - 1); else render();
+    startX = null; dx = 0;
+  }
+  stage.addEventListener('pointerup', endDrag);
+  stage.addEventListener('pointercancel', endDrag);
+
+  /* wheel */
+  let wheelLock = false;
+  stage.addEventListener('wheel', e => {
+    if (wheelLock || Math.abs(e.deltaY) < 24) return;
+    wheelLock = true; setTimeout(() => wheelLock = false, 900);
+    goTo(idx + (e.deltaY > 0 ? 1 : -1));
+  }, { passive: true });
+
+  /* gold dust — one slow motion idea */
+  document.querySelectorAll('.dust').forEach(layer => {
+    for (let i = 0; i < 16; i++) {
+      const s = document.createElement('i');
+      const size = 3 + Math.random() * 6;
+      s.style.width = s.style.height = size + 'px';
+      s.style.left = (Math.random() * 96 + 2) + '%';
+      s.style.setProperty('--o', (0.18 + Math.random() * 0.4).toFixed(2));
+      s.style.setProperty('--sway', (Math.random() * 36 - 18).toFixed(0) + 'px');
+      s.style.animationDuration = (11 + Math.random() * 10).toFixed(1) + 's';
+      s.style.animationDelay = (-Math.random() * 16).toFixed(1) + 's';
+      layer.appendChild(s);
+    }
+  });
+
+  goTo(0);
+</script>
+</body>
+</html>
